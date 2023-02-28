@@ -1,6 +1,17 @@
+import Link from "next/link"
 import { useRouter } from "next/router"
 import { useState } from "react"
+import { Input } from "../../common"
 import { Layout } from "../../layout"
+
+interface Produto {
+    id?: string;
+    nome?: string;
+    descricao?: string;
+    preco?: number;
+    sku?: string;
+    cadastro?: string;
+}
 
 export const ProductRegistration: React.FC = () => {
     // const service = useProdutoService()
@@ -15,8 +26,17 @@ export const ProductRegistration: React.FC = () => {
     const router = useRouter();
     const { id: queryId  } = router.query;
     
+    const submit = () => {
+        const produto: Produto = {
+            id,
+            sku, 
+            preco: preco, 
+            nome, 
+            descricao
+        }
+    }
     return (
-        <Layout titule="Produtos" >
+        <Layout title="Produtos" >
             {id &&
                 <div className="columns">
                     <Input label="Código:"
@@ -42,10 +62,10 @@ export const ProductRegistration: React.FC = () => {
                     value={sku}
                     id="inputSku"
                     placeholder="Digite o SKU do produto"
-                    error={errors.sku}
+              
                 />
 
-                <InputMoney label="Preço: *"
+                {/* <InputMoney label="Preço: *"
                     columnClasses="is-half"
                     onChange={e => setPreco(e.target.value)}
                     value={preco}
@@ -53,7 +73,7 @@ export const ProductRegistration: React.FC = () => {
                     placeholder="Digite o Preço do produto"
                     maxLength={16}
                     error={errors.preco}
-                />
+                /> */}
             </div>
 
             <div className="columns">
@@ -63,7 +83,7 @@ export const ProductRegistration: React.FC = () => {
                     value={nome}
                     id="inputNome"
                     placeholder="Digite o Nome do produto"
-                    error={errors.nome}
+                    // error={errors.nome}
                 />
             </div>
 
@@ -75,9 +95,9 @@ export const ProductRegistration: React.FC = () => {
                             id="inputDesc" value={descricao}
                             onChange={event => setDescricao(event.target.value)}
                             placeholder="Digite a Descrição detalhada do produto" />
-                        {errors.descricao &&
+                        {/* {errors.descricao &&
                             <p className="help is-danger">{errors.descricao}</p>
-                        }
+                        } */}
                     </div>
                 </div>
             </div>
